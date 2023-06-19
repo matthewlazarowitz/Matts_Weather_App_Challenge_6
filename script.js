@@ -6,6 +6,24 @@ $(function () {
     var forecast = $("#forecast");
     var searchHistory = $("#search-history");
 
+
+    function addCityToSearchHistory(city) {
+        var searchHistoryItem =
+            "<button class='search-history-item'>" +
+            city +
+            "</button>";
+
+        searchHistory.append(searchHistoryItem);
+
+        $(".search-history-item").last().on("click", function () {
+            currentWeather.empty();
+            forecast.empty();
+
+            getCurrentWeather(city);
+            getForecast(city);
+        });
+    }
+
     searchForm.on("submit", function (event) {
         event.preventDefault();
         var city = cityInput.val().trim();
@@ -112,23 +130,6 @@ $(function () {
 
                 forecast.append(forecastContent);
             }
-        });
-    }
-
-    function addCityToSearchHistory(city) {
-        var searchHistoryItem =
-            "<button class='search-history-item'>" +
-            city +
-            "</button>";
-
-        searchHistory.append(searchHistoryItem);
-
-        $(".search-history-item").last().on("click", function () {
-            currentWeather.empty();
-            forecast.empty();
-
-            getCurrentWeather(city);
-            getForecast(city);
         });
     }
 });
