@@ -4,7 +4,7 @@ $(function () {
     var cityInput = $("#city-input");
     var currentWeather = $("#current-weather");
     var forecast = $("#forecast");
-    var searchHistory = $("#search-history-buttons");
+    var searchHistory = $("#search-history");
 
     searchForm.on("submit", function (event) {
         event.preventDefault();
