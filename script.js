@@ -68,5 +68,50 @@ $(function () {
         });
     }
     
-
+    function getForecast(city) {
+        var forecastURL =
+          "https://api.openweathermap.org/data/2.5/forecast?q=" +
+          city +
+          "&appid=" +
+          apiKey +
+          "&units=imperial";
+    
+        $.ajax({
+          url: forecastURL,
+          method: "GET",
+        }).then(function (response) {
+        
+          var forecastData = response.list;
+    
+          for (var i = 0; i < forecastData.length; i += 8) {
+            var forecastItem = forecastData[i];
+            var date = new Date(forecastItem.dt * 1000);
+            var icon = forecastItem.weather[0].icon;
+            var temperature = forecastItem.main.temp;
+            var humidity = forecastItem.main.humidity;
+            var windSpeed = forecastItem.wind.speed;
+    
+            var forecastContent =
+              "<div class='forecast-item'>" +
+              "<h3>" +
+              date.toLocaleDateString() +
+              "</h3>" +
+              "<img src='https://openweathermap.org/img/w/" +
+              icon +
+              ".png' alt='Weather Icon'>" +
+              "<p>Temperature: " +
+              temperature +
+              " &#8457;</p>" +
+              "<p>Humidity: " +
+              humidity +
+              "%</p>" +
+              "<p>Wind Speed: " +
+              windSpeed +
+              " mph</p>" +
+              "</div>";
+    
+            forecast.append(forecastContent);
+          }
+        });
+      }
 });
