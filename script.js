@@ -6,4 +6,10 @@ $(function () {
     var forecast = $("#forecast");
     var searchHistory = $("#search-history-buttons");
 
+    searchForm.on("submit", function (event) {
+        event.preventDefault();
+        var city = cityInput.val().trim();
+        if (city === "") return;
+
+    });
 });
