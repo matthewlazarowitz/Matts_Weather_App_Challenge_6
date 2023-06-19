@@ -11,5 +11,15 @@ $(function () {
         var city = cityInput.val().trim();
         if (city === "") return;
 
+        currentWeather.empty();
+        forecast.empty();
+
+        getCurrentWeather(city);
+        getForecast(city);
+
+        cityInput.val("");
+
+        addCityToSearchHistory(city);
+
     });
 });
